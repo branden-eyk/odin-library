@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html {
+    font-size: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr 5fr 0.5fr;
+    min-height: 100%;
+    font-family: Roboto;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #383737;
+    color: white;
+    box-shadow: 0px 1px 5px black;
+}
+
+.header__buttons {
+    position: absolute;
+    right: 10px;
+}
+
+.header__buttons button {
+    padding: 5px 15px 5px 15px;
+}
+
+.library {
+    background-color: gray;
+    display: flex;
+    flex-wrap: true;
+    justify-content: flex-start;
+}
+
+.library__card {
+    height: 200px;
+    width: 200px;
+    background-color: #dcdcdc;
+    margin: 15px 15px 15px 15px;
+    border-radius: 15px;
+}
+
+.library__card--add {
+    background-color: #808080;
+}
+
+.library__card--add img {
+    height: 100%;
+    width: auto;
+    filter: invert(80%) sepia(18%) saturate(1%) hue-rotate(320deg) brightness(101%) contrast(108%);
+}
+
+.library__card--add img:hover {
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
