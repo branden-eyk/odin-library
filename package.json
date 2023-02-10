@@ -1,0 +1,28 @@
+{
+  "name": "odin-library",
+  "version": "1.0.0",
+  "description": "Creating a webpage to track one's library and books read using objects as part of The Odin Project",
+  "main": "javascript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "wesbos"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/branden-eyk/odin-library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/branden-eyk/odin-library/issues"
+  },
+  "homepage": "https://github.com/branden-eyk/odin-library#readme",
+  "dependencies": {
+    "eslint-config-wesbos": "^3.2.3"
+  }
+}
