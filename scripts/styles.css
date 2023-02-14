@@ -29,7 +29,7 @@ body {
     right: 10px;
 }
 
-.header__buttons button {
+button {
     padding: 5px 15px 5px 15px;
 }
 
@@ -70,4 +70,40 @@ body {
     justify-content: center;
     align-items: center;
     background-color: white;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    text-align: center;
+    padding: 5px 15px 15px 15px;
+    border-radius: 15px;
+    background-color: white;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.modal__form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal__form label {
+    justify-self: end;
+}
+
+.form__input {
+    justify-self: start;
+}
+
+.form__button {
+    grid-column: 1/3;
+    justify-self: center;
 }
