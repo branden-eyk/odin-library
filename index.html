@@ -25,22 +25,24 @@
     <div class="footer">
         <h3>Copyright 2023 Branden Eyk</h3>
     </div>
-    <script src="./scripts/javascript.js"></script>
 
     <div class="modal hidden">
-        <h3>Add New Book</h3>
-        <form action="" method="get" class="modal__form">
-            <label for="title">Title: </label>
-            <input id="title" name="title" type="text" class="form__input form__input--text">
-            <label for="author">Author: </label>
-            <input id="author" name="author" type="text" class="form__input form__input--text">
-            <label form="pages">Number of Pages: </label>
-            <input id="pages" name="pages" type="number" class="form__input form__input--number">
-            <label for="read">Have Read the Book: </label>
-            <input id="read" name="read" type="checkbox" class="form__input form__input--checkbox">
-            <button class="form__button">Submit</button>
-        </form>
+        <div class="modal__content">
+            <h3>Add New Book</h3>
+            <form action="" method="get" class="modal__form">
+                <label for="title">Title: </label>
+                <input id="title" name="title" type="text" class="form__input form__input--text">
+                <label for="author">Author: </label>
+                <input id="author" name="author" type="text" class="form__input form__input--text">
+                <label form="pages">Number of Pages: </label>
+                <input id="pages" name="pages" type="number" class="form__input form__input--number">
+                <label for="read">Have Read the Book: </label>
+                <input id="read" name="read" type="checkbox" class="form__input form__input--checkbox">
+                <button class="form__button">Submit</button>
+            </form>
+        </div>
     </div>
+    <script src="./scripts/javascript.js"></script>
 </body>
 
 </html>
