@@ -19,10 +19,8 @@ function Book(title, author, pages, read) {
   this.key = title + author + pages;
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.read ? 'has been read' : 'not read yet'
-  }`;
+Book.prototype.toggleRead = function () {
+  this.read = !this.read;
 };
 
 function displayBooks() {
@@ -69,7 +67,6 @@ function submitForm(e) {
     alert('That book is already in your library');
   }
 
-  console.log(myLibrary);
   e.preventDefault();
   displayBooks();
   toggleModal();
@@ -102,18 +99,26 @@ function addBook(book) {
   const readBtn = document.createElement('button');
   readBtn.classList.add('card__readBtn', `card__readBtn--${readStatus}`);
   readBtn.innerText = readStatus;
-  readBtn.addEventListener('click', toggleRead);
+  readBtn.addEventListener('click', toggleReadDisplay);
   newDiv.appendChild(readBtn);
 
   const deleteBtn = document.createElement('span');
   deleteBtn.classList.add('card__deleteBtn');
   deleteBtn.innerHTML = '&times';
+  deleteBtn.addEventListener('click', deleteBook);
   newDiv.appendChild(deleteBtn);
 
   library.insertAdjacentElement('afterbegin', newDiv);
 }
 
-function toggleRead(e) {
+function toggleReadDisplay(e) {
+  const keyToFind = e.target.parentNode.dataset.key;
+  myLibrary.forEach((book) => {
+    if (book.key === keyToFind) {
+      book.toggleRead();
+    }
+  });
+
   if (e.target.innerText === 'Read') {
     e.target.innerText = 'Unread';
     e.target.classList.remove('card__readBtn--Read');
@@ -123,4 +128,16 @@ function toggleRead(e) {
     e.target.classList.remove('card__readBtn--Unread');
     e.target.classList.add('card__readBtn--Read');
   }
+}
+
+function deleteBook(e) {
+  const deleteDiv = e.target.parentNode;
+  const library = deleteDiv.parentNode;
+
+  myLibrary.forEach((book, index) => {
+    if (book.key === deleteDiv.dataset.key) {
+      myLibrary.splice(index, 1);
+    }
+  });
+  library.removeChild(deleteDiv);
 }
