@@ -86,12 +86,41 @@ function addBook(book) {
   const readStatus = book.read ? 'Read' : 'Unread';
   newDiv.classList.add('library__card');
   newDiv.dataset.key = `${book.key}`;
-  newDiv.innerHTML = `
-    <h3>${book.title}</h3>
-    <p>By: ${book.author}</p>
-    <p>Pages: ${book.pages}</p>
-    <button class="card__readBtn card__readBtn--${readStatus}">${readStatus}</button>
-    <span class="card__deleteBtn">&times</span>
-  `;
+
+  const title = document.createElement('h3');
+  title.innerText = book.title;
+  newDiv.appendChild(title);
+
+  const author = document.createElement('p');
+  author.innerText = book.author;
+  newDiv.appendChild(author);
+
+  const pages = document.createElement('p');
+  pages.innerText = book.pages;
+  newDiv.appendChild(pages);
+
+  const readBtn = document.createElement('button');
+  readBtn.classList.add('card__readBtn', `card__readBtn--${readStatus}`);
+  readBtn.innerText = readStatus;
+  readBtn.addEventListener('click', toggleRead);
+  newDiv.appendChild(readBtn);
+
+  const deleteBtn = document.createElement('span');
+  deleteBtn.classList.add('card__deleteBtn');
+  deleteBtn.innerHTML = '&times';
+  newDiv.appendChild(deleteBtn);
+
   library.insertAdjacentElement('afterbegin', newDiv);
+}
+
+function toggleRead(e) {
+  if (e.target.innerText === 'Read') {
+    e.target.innerText = 'Unread';
+    e.target.classList.remove('card__readBtn--Read');
+    e.target.classList.add('card__readBtn--Unread');
+  } else {
+    e.target.innerText = 'Read';
+    e.target.classList.remove('card__readBtn--Unread');
+    e.target.classList.add('card__readBtn--Read');
+  }
 }
