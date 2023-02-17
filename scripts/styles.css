@@ -61,6 +61,11 @@ button {
     margin: 0 0 10px 0;
 }
 
+.library__card h3 {
+    font-size: 1rem;
+    text-align: center;
+}
+
 .card__deleteBtn {
     position: absolute;
     top: 0px;
