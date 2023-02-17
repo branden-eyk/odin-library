@@ -158,6 +158,10 @@ button {
     justify-self: start;
 }
 
+.form__input--error {
+    border-color: red;
+}
+
 .form__button {
     grid-column: 1/3;
     justify-self: center;

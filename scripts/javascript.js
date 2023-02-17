@@ -46,35 +46,38 @@ function submitForm(e) {
   const pages = document.querySelector('#pages');
   const read = document.querySelector('#read');
 
-  const newBook = new Book(
-    title.value,
-    author.value,
-    pages.value,
-    read.checked
-  );
+  clearErrors(title, author, pages);
+  if (validate(title, author, pages)) {
+    const newBook = new Book(
+      title.value,
+      author.value,
+      pages.value,
+      read.checked
+    );
 
-  let isAlreadyInLibrary = false;
+    let isAlreadyInLibrary = false;
 
-  myLibrary.forEach((book) =>
-    book.key === newBook.key
-      ? (isAlreadyInLibrary = true)
-      : (isAlreadyInLibrary = false)
-  );
+    myLibrary.forEach((book) =>
+      book.key === newBook.key
+        ? (isAlreadyInLibrary = true)
+        : (isAlreadyInLibrary = false)
+    );
 
-  if (!isAlreadyInLibrary) {
-    myLibrary.push(newBook);
-  } else {
-    alert('That book is already in your library');
+    if (!isAlreadyInLibrary) {
+      myLibrary.push(newBook);
+    } else {
+      alert('That book is already in your library');
+    }
+
+    e.preventDefault();
+    displayBooks();
+    toggleModal();
+
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read.checked = false;
   }
-
-  e.preventDefault();
-  displayBooks();
-  toggleModal();
-
-  title.value = '';
-  author.value = '';
-  pages.value = '';
-  read.checked = false;
 }
 
 function addBook(book) {
@@ -140,4 +143,26 @@ function deleteBook(e) {
     }
   });
   library.removeChild(deleteDiv);
+}
+
+function validate(title, author, pages) {
+  if (title.value === '') {
+    title.classList.add('form__input--error');
+    return false;
+  }
+  if (author.value === '') {
+    author.classList.add('form__input--error');
+    return false;
+  }
+  if (pages.value === '') {
+    pages.classList.add('form__input--error');
+  } else {
+    return true;
+  }
+}
+
+function clearErrors(title, author, pages) {
+  title.classList.remove('form__input--error');
+  author.classList.remove('form__input--error');
+  pages.classList.remove('form__input--error');
 }
