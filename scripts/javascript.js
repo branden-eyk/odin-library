@@ -14,8 +14,16 @@ modalBackground.addEventListener('click', (e) => {
 });
 
 function displayBooks() {
-  myLibrary.forEach((book) => addBook(book));
-  /* Add function for checking if a book is already displayed on page, maybe using the title and author combo as a way to identify it */
+  const filteredLibrary = myLibrary.filter((book) => {
+    const onPageBooks = document.querySelectorAll('.library__card');
+    for (const onPageBook of onPageBooks) {
+      if (onPageBook.dataset.key === book.key) {
+        return false;
+      }
+    }
+    return true;
+  });
+  filteredLibrary.forEach((book) => addBook(book));
 }
 
 function toggleModal() {
@@ -34,8 +42,22 @@ function submitForm(e) {
     pages.value,
     read.checked
   );
-  console.log(newBook);
-  myLibrary.push(newBook);
+
+  let isAlreadyInLibrary = false;
+
+  myLibrary.forEach((book) =>
+    book.key === newBook.key
+      ? (isAlreadyInLibrary = true)
+      : (isAlreadyInLibrary = false)
+  );
+
+  if (!isAlreadyInLibrary) {
+    myLibrary.push(newBook);
+  } else {
+    alert('That book is already in your library');
+  }
+
+  console.log(myLibrary);
   e.preventDefault();
   displayBooks();
   toggleModal();
@@ -45,6 +67,7 @@ function addBook(book) {
   const newDiv = document.createElement('div');
   const readStatus = book.read ? 'Read' : 'Unread';
   newDiv.classList.add('library__card');
+  newDiv.dataset.key = `${book.key}`;
   newDiv.innerHTML = `
     <h3>${book.title}</h3>
     <p>By: ${book.author}</p>
@@ -60,6 +83,7 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.key = title + author + pages;
 }
 
 Book.prototype.info = function () {
