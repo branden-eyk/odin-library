@@ -1,17 +1,29 @@
 const myLibrary = [];
 const addBtn = document.querySelector('.library__card--add');
-const library = document.querySelector('.library');
-const modalBackground = document.querySelector('.modal');
 const modal = document.querySelector('.modal');
 const submitBtn = document.querySelector('.form__button');
 
 addBtn.addEventListener('click', toggleModal);
 submitBtn.addEventListener('click', submitForm);
-modalBackground.addEventListener('click', (e) => {
-  if (e.target === modalBackground) {
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
     toggleModal(e);
   }
 });
+
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+  this.key = title + author + pages;
+}
+
+Book.prototype.info = function () {
+  return `${this.title} by ${this.author}, ${this.pages} pages, ${
+    this.read ? 'has been read' : 'not read yet'
+  }`;
+};
 
 function displayBooks() {
   const filteredLibrary = myLibrary.filter((book) => {
@@ -61,9 +73,15 @@ function submitForm(e) {
   e.preventDefault();
   displayBooks();
   toggleModal();
+
+  title.value = '';
+  author.value = '';
+  pages.value = '';
+  read.checked = false;
 }
 
 function addBook(book) {
+  const library = document.querySelector('.library');
   const newDiv = document.createElement('div');
   const readStatus = book.read ? 'Read' : 'Unread';
   newDiv.classList.add('library__card');
@@ -77,17 +95,3 @@ function addBook(book) {
   `;
   library.insertAdjacentElement('afterbegin', newDiv);
 }
-
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.key = title + author + pages;
-}
-
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${
-    this.read ? 'has been read' : 'not read yet'
-  }`;
-};
