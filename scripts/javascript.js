@@ -13,18 +13,20 @@ modal.addEventListener('click', (e) => {
   }
 });
 
-// Object constructor for book objects that represent the books a user adds to their library
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.key = title + author + pages; // Key used to ensure uniqueness and prevent duplicates
-}
+// Class for defining book objects that represent the books a user adds to their library
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.key = title + author + pages; // Key used to ensure uniqueness and prevent duplicates
+  }
 
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
+  toggleRead() {
+    this.read = !this.read;
+  }
+}
 
 // -- Event Callback Functions --
 
